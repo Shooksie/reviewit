@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 import { ApolloProvider } from '@apollo/client';
 import { CreateReviewPage } from '@reviewit/pages';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const client = new ApolloClient({
   uri: 'https://48p1r2roz4.sse.codesandbox.io',
@@ -22,12 +23,24 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <ApolloProvider client={client}>
-      <StyledApp>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home">React Bootstrap</Navbar.Brand>
-        </Navbar>
-        <CreateReviewPage />
-      </StyledApp>
+      <Router>
+        <StyledApp>
+          <Navbar bg="dark" variant="dark">
+            <Navbar.Brand href="#home">React Bootstrap</Navbar.Brand>
+          </Navbar>
+          <Switch>
+            <Route path="/new">
+              <CreateReviewPage />
+            </Route>
+            <Route path="/users">
+              <div />
+            </Route>
+            <Route path="/">
+              <div />
+            </Route>
+          </Switch>
+        </StyledApp>
+      </Router>
     </ApolloProvider>
   );
 }
