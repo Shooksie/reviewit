@@ -1,0 +1,64 @@
+- table:
+    schema: public
+    name: reviews
+  object_relationships:
+  - name: topic
+    using:
+      foreign_key_constraint_on: for
+  insert_permissions:
+  - role: user
+    permission:
+      check:
+        reviewer:
+          _eq: X-Hasura-User-Id
+      columns:
+      - name
+      - rating
+      - review
+      - reviewer
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns: []
+      filter: {}
+  update_permissions:
+  - role: user
+    permission:
+      columns:
+      - name
+      - rating
+      - review
+      filter:
+        reviewer:
+          _eq: X-Hasura-User-Id
+      check: null
+  delete_permissions:
+  - role: user
+    permission:
+      filter:
+        reviewer:
+          _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: topic
+  array_relationships:
+  - name: reviews
+    using:
+      foreign_key_constraint_on:
+        column: for
+        table:
+          schema: public
+          name: reviews
+  insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      columns:
+      - name
+      backend_only: false
+  select_permissions:
+  - role: user
+    permission:
+      columns: []
+      filter: {}

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import JoditEditor from 'jodit-react';
 
 export const CreateReviewPage = () => {
   const editor = useRef(null);
@@ -41,16 +40,6 @@ export const CreateReviewPage = () => {
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlTextarea1">
               <Form.Label>Example textarea</Form.Label>
-              <JoditEditor
-                ref={editor}
-                value={content || ''}
-                config={config}
-                tabIndex={1} // tabIndex of textarea
-                onBlur={(newContent) => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                onChange={(newContent) => {
-                  console.log(newContent);
-                }}
-              />
             </Form.Group>
           </Form>
         </Card.Body>
