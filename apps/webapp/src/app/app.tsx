@@ -1,5 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'semantic-ui-css/semantic.min.css';
+
 import Navbar from 'react-bootstrap/Navbar';
 import styled from 'styled-components';
 
@@ -9,7 +11,7 @@ import { CreateReviewPage } from '@reviewit/pages';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 const client = new ApolloClient({
-  uri: 'https://48p1r2roz4.sse.codesandbox.io',
+  uri: 'http://localhost:8087/v1/graphql',
   cache: new InMemoryCache(),
 });
 

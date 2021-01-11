@@ -1,0 +1,35 @@
+query SearchTopic($match: String = "%%") {
+  topic(
+    where: { name: { _ilike: $match } }
+    limit: 10
+    order_by: { updated_at: desc }
+  ) {
+    id
+    name
+    created_at
+  }
+}
+
+mutation CreateReview(
+  $topic: String = ""
+  $rating: float8 = "0"
+  $url: String = ""
+  $review: String = ""
+  $name: String = ""
+) {
+  insert_reviews_one(
+    object: {
+      name: $name
+      topic: {
+        data: { name: $topic }
+        on_conflict: { constraint: topic_name_key, update_columns: name }
+      }
+      rating: $rating
+      source: $url
+      review: $review
+    }
+  ) {
+    name
+    id
+  }
+}
